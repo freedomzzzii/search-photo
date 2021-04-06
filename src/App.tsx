@@ -1,21 +1,46 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import './App.scss';
 
+import { fetchGetListPhoto, fetchFilterListPhoto } from './redux/actions';
+import Navbar from './components/navbar/Navbar';
+import Home from './pages/home/Home';
+import { actionDefaultType } from './common/type';
+
+type stateType = {
+  getListPhoto: actionDefaultType & {
+    data: Array<dataType>,
+  },
+};
+type dataType = {
+  albumId: number,
+  id: number,
+  thumbnailUrl: string,
+  title: string,
+  url: string,
+};
+
 function App() {
+  const dispatch = useDispatch();
+  const { getListPhoto } = useSelector((state: stateType) => state);
+
+  useEffect(() => {
+    dispatch(fetchGetListPhoto());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchFilterListPhoto(getListPhoto.data));
+  }, [getListPhoto]);
+
+  if (!getListPhoto.data) {
+    return null;
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar />
+      <Home />
     </div>
   );
 }
