@@ -1,5 +1,5 @@
 import constant from '../../common/constant';
-import { actionDefaultType } from '../../common/type'
+import { actionDefaultType, actionDefaultWithPayloadType } from '../../common/type'
 
 export const getListPhoto = (state = constant.initialState, action: actionDefaultType) => {
   switch (action.type) {
@@ -11,5 +11,14 @@ export const getListPhoto = (state = constant.initialState, action: actionDefaul
       return Object.assign({}, state, { ...action });
     default:
       return state ? state : constant.initialState;
+  }
+};
+
+export const filterListPhoto = (state = constant.initialStateWithPayload, action: actionDefaultWithPayloadType) => {
+  switch (action.type) {
+    case constant.LIST_PHOTO:
+      return Object.assign({}, state, { ...action });
+    default:
+      return state ? state : constant.initialStateWithPayload;
   }
 };

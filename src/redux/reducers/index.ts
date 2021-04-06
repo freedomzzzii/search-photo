@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
 
-import { getListPhoto } from './photo.reducers';
+import { getListPhoto, filterListPhoto } from './photo.reducers';
 
 export default combineReducers({
   // photo
   getListPhoto,
+  filterListPhoto,
 });
