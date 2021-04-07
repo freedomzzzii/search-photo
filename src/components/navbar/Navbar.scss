@@ -6,9 +6,9 @@
   top: 0;
   z-index: 999;
   border-bottom: $nav-border;
-  padding: 10px;
+  padding: 10px 30px;
   > .nav {
-    max-width: 600px;
+    max-width: 1024px;
     margin: 0px auto;
     display: flex;
     justify-content: space-between;
