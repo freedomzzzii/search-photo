@@ -1,0 +1,25 @@
+@import '../../common/constant.scss';
+
+.Home {
+  margin: 20px;
+  > .box-items {
+    display: flex;
+    flex-wrap: wrap;
+    > .item {
+      width: calc((100% / 4) - 42px);
+      margin: 10px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      border: $app-border;
+      padding: 10px;
+      > .title {
+        white-space: nowrap;
+        max-width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        margin-top: 5px;
+      }
+    }
+  }
+}
