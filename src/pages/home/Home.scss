@@ -5,6 +5,8 @@
   > .box-items {
     display: flex;
     flex-wrap: wrap;
+    max-width: 1024px;
+    margin: 0px auto;
     > .item {
       width: calc((100% / 4) - 42px);
       margin: 10px;
