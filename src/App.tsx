@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import './App.scss';
 
 import { fetchGetListPhoto, fetchFilterListPhoto } from './redux/actions';
-import Navbar from './components/navbar/Navbar';
+import Navbar from './components/Navbar/Navbar';
 import Home from './pages/home/Home';
 import { actionDefaultType } from './common/type';
+import Loading from './components/Loading/Loading';
 
 type stateType = {
   getListPhoto: actionDefaultType & {
@@ -31,10 +32,10 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchFilterListPhoto(getListPhoto.data));
-  }, [getListPhoto]);
+  }, [getListPhoto]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!getListPhoto.data) {
-    return null;
+    return <Loading />;
   }
 
   return (

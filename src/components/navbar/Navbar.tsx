@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent, useRef, RefObject } from 'react';
+import { useState, ChangeEvent, useRef, RefObject, KeyboardEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import './Navbar.scss';
@@ -30,24 +30,29 @@ function Navbar() {
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => setSearch(event.target.value);
 
-  const handleFilterData = (): Array<any> => {
+  const handleFilterData = () => {
     try {
-      return getListPhoto.data?.filter(ele => new RegExp(search).test(ele.title));
-    } catch (error) {
-      return [];
-    }
-  }
+      const newData = getListPhoto.data?.filter(ele => new RegExp(search).test(ele.title));
 
-  useEffect(() => {
-    dispatch(fetchFilterListPhoto(handleFilterData()));
-  }, [search]);
+      return dispatch(fetchFilterListPhoto(newData));
+    } catch (error) {
+      return dispatch(fetchFilterListPhoto([]));;
+    }
+  };
+
+  const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>): void => {
+    if (event.key === 'Enter') {
+      handleFilterData();
+    }
+  };
 
   return (
     <div className="Navbar">
       <div className="nav">
         <div className="title">Allbum</div>
         <span className="box-search" ref={dropdownRef}>
-          <input placeholder="search title" value={search} onChange={handleSearch} />
+          <input placeholder="search title" value={search} onChange={handleSearch} onKeyPress={handleKeyPress} />
+          <button className="btn" onClick={handleFilterData}>search</button>
         </span>
         <span />
       </div>
